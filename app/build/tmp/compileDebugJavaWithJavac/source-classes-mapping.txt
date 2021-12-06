@@ -1,0 +1,18 @@
+com/example/project/checking.java
+ com.example.project.checking
+com/example/project/BuildConfig.java
+ com.example.project.BuildConfig
+com/example/project/studentID.java
+ com.example.project.studentID
+ com.example.project.studentID$1
+ com.example.project.studentID$2
+ com.example.project.studentID$3
+ com.example.project.studentID$4
+ com.example.project.studentID$5
+com/example/project/barcode.java
+ com.example.project.barcode
+ com.example.project.barcode$1
+ com.example.project.barcode$2
+ com.example.project.barcode$3
+com/example/project/MainActivity.java
+ com.example.project.MainActivity

@@ -1,0 +1,74 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.project"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="31" />
+9-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:32:5-67
+11-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:32:22-64
+12
+13    <application
+13-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:5:5-31:19
+14        android:allowBackup="true"
+14-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:7:9-35
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.5.0] C:\Users\psoon\.gradle\caches\transforms-3\97e7ec19bd11dff7ae3d399ac9d0fa5b\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
+16        android:debuggable="true"
+17        android:icon="@mipmap/ic_launcher"
+17-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:8:9-43
+18        android:label="@string/app_name"
+18-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:9:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:10:9-54
+20        android:supportsRtl="true"
+20-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:11:9-35
+21        android:testOnly="true"
+22        android:theme="@style/Theme.Project"
+22-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:12:9-45
+23        android:usesCleartextTraffic="true" >
+23-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:6:9-44
+24        <activity
+24-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:13:9-15:40
+25            android:name="com.example.project.studentID"
+25-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:14:13-38
+26            android:exported="false" />
+26-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:15:13-37
+27        <activity
+27-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:16:9-18:40
+28            android:name="com.example.project.barcode"
+28-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:17:13-36
+29            android:exported="false" />
+29-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:18:13-37
+30        <activity
+30-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:19:9-21:40
+31            android:name="com.example.project.checking"
+31-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:20:13-37
+32            android:exported="false" />
+32-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:21:13-37
+33        <activity
+33-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:22:9-30:20
+34            android:name="com.example.project.MainActivity"
+34-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:23:13-41
+35            android:exported="true" >
+35-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:24:13-36
+36            <intent-filter>
+36-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:25:13-29:29
+37                <action android:name="android.intent.action.MAIN" />
+37-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:26:17-69
+37-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:26:25-66
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:28:17-77
+39-->D:\univ\Program\AndroidStudioProjects\Project\app\src\main\AndroidManifest.xml:28:27-74
+40            </intent-filter>
+41        </activity>
+42    </application>
+43
+44</manifest>
