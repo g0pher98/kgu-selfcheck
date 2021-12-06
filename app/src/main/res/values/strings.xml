@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Project</string>
+
+    <string name="req_host">https://kutis.kyonggi.ac.kr/</string>
+    <string name="save_filename">selfcheck.json</string>
+
+    <string name="header">방문자 건강상태 자가진단</string>
+    <string name="footer">경기대학교 컴퓨터공학부</string>
+
+    <!-- 버튼 -->
+    <string name="findID"><u>학번이 기억나지 않으신가요?</u></string>
+
+    <!-- 전자문진 항목 -->
+    <string name="Q1">1.  방문인이 코로나19가 의심되는 아래의 임상증상*이 있나요? *(주요 임상증상) 발열(37.5℃ 이상), 기침, 호흡곤란, 오한, 근육통, 두통, 인후통, 후각/미각 소실 (단, 코로나19와 관계없이 평소의 기저질환의로 인한 증상인 경우는 \'아니오\' 선택)</string>
+    <string name="Q2">2.  방문인 또는 동거인이 코로나19 진단검사를 받고 그 결과를 기다리고 있나요? ※ ①직업특성, 또는 ②대회참여 등 선제적 예방 목적의 진단검사인 경우는 \'아니오\' 선택</string>
+    <string name="Q3">3.  방문인 또는 동거인이 방역당국에 의해 현재 자가격리가 이루어지고 있나요? ※ 동거인이 자가격리중인 경우, ①매 등교 희망일로부터 2일 이내 진단검사 결과가 음성인 경우 또는 ②격리 통지를 받은 \'즉시\' 자가격리된 동거인과 접촉이 없었던 경우는 \'아니오\' 선택</string>
+
+    <!-- 전자문진 선택지 -->
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
+
+    <!-- 결과 안내 -->
+    <string name="warn_submessge">등교하지 않아도 학교에서는 출석으로 인정합니다. 발열, 호흡기 증상 등 코로나19가 의심되는 증상이 있는 경우 교내 코로나대책본부(031-249-1508) 또는 해당 콜센터(☎1339)와 상담하고 선별진료 방문 후 진료·검사 받기 등 안내에 따라 주시기 바랍니다</string>
+</resources>
