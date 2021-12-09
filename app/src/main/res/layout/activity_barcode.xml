@@ -161,23 +161,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
-        android:id="@+id/change"
-        android:layout_width="47dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="1dp"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/change" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="28dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -185,12 +172,13 @@
         <ImageButton
             android:id="@+id/menu"
             android:layout_width="23dp"
-            android:layout_height="28dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="8dp"
             android:background="#00FFFFFF"
             android:backgroundTint="#00FFFFFF"
             android:scaleType="fitXY"
-            android:src="@drawable/setting"
 
+            android:src="@drawable/setting"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

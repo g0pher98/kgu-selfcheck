@@ -56,6 +56,7 @@ int animator mtrl_fab_hide_motion_spec 0x7f020016
 int animator mtrl_fab_show_motion_spec 0x7f020017
 int animator mtrl_fab_transformation_sheet_collapse_spec 0x7f020018
 int animator mtrl_fab_transformation_sheet_expand_spec 0x7f020019
+int array barcodeType 0x7f130001
 int attr SharedValue 0x7f030000
 int attr SharedValueId 0x7f030001
 int attr actionBarDivider 0x7f030002
@@ -1964,7 +1965,6 @@ int id center_horizontal 0x7f08006d
 int id center_vertical 0x7f08006e
 int id chain 0x7f08006f
 int id chains 0x7f080070
-int id change 0x7f080071
 int id checkbox 0x7f080072
 int id checked 0x7f080073
 int id chip 0x7f080074

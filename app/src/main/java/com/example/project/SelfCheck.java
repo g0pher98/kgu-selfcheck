@@ -59,7 +59,6 @@ public class SelfCheck extends SelfCheckInfo {
         context = newContext;
         init();
 
-        //reset(); // TODO 현재 line은 디버깅용. 지울예정
         loadData();
     }
 

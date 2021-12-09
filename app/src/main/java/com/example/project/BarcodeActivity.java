@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 public class BarcodeActivity extends AppCompatActivity {
     SelfCheck selfCheck;
+    int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,38 +29,42 @@ public class BarcodeActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        // 화면 밝기 설정
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        float brightness = params.screenBrightness;
-        params.screenBrightness = 1f;
-
-        ImageView barcodeView = (ImageView) findViewById(R.id.barcode);
-
         selfCheck = new SelfCheck(getApplicationContext(), getIntent());
+        mode = selfCheck.defaultBarcodeType;
 
-        // 내 정보 출력
+        // 화면 밝기 설정
+        // TODO
+        //   - 화면 밝기가 액티비티를 벗어나면 원복되는지 확인해야함.
+        //   - 설정 변경 후 바로 반영되도록 수정해야함.
+        if (selfCheck.isAutoBright) {
+            WindowManager.LayoutParams params = getWindow().getAttributes();
+            float brightness = params.screenBrightness;
+            params.screenBrightness = 1f;
+        }
+
+        // 상단 View 설정
         TextView myId = (TextView) findViewById(R.id.my_id);
         TextView myName = (TextView) findViewById(R.id.my_name);
-        ImageButton b2 = (ImageButton) findViewById(R.id.menu);
-        b2.setOnClickListener(new View.OnClickListener(){
+        ImageButton btnMenu = (ImageButton) findViewById(R.id.menu);
+        btnMenu.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = selfCheck.toIntent(SettingActivity.class);
                 startActivity(intent);
             }
         });
-        ImageButton b1 = (ImageButton) findViewById(R.id.change);
 
-        final int[] mode = {1};
+        ImageView barcodeView = (ImageView) findViewById(R.id.barcode);
 
-        b1.setOnClickListener(new View.OnClickListener(){
+        barcodeView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(mode[0] == 1)
-                    mode[0] = 0;
+                if(mode == 1)
+                    mode = 2;
                 else
-                    mode[0] = 1;
-                Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode[0]);
+                    mode = 1;
+                Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode);
+                // TODO QR/바코드에 따라 크기 바뀌도록 수정
                 barcodeView.setImageBitmap(studentCode);
             }
         });
@@ -85,11 +90,11 @@ public class BarcodeActivity extends AppCompatActivity {
             msg.setText("현재 귀하의 건강상태는 확인이 필요한 경우로, 금일 학교 방문을 삼가주시기 바랍니다.");
             msg.setTextColor(Color.parseColor("#FFAF1B1B"));
         } else {
-            submsg.setText("");
+            submsg.setText("QR 또는 바코드를 터치해서 모드를 전환하실 수 있습니다.");
         }
 
         if (!selfCheck.studentID.equals("")) {
-            Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode[0]);
+            Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode);
             barcodeView.setImageBitmap(studentCode);
         } else {
             Toast.makeText(getApplicationContext(), "잘못된 접근입니다. 학번정보가 없습니다", Toast.LENGTH_LONG).show();
@@ -99,5 +104,10 @@ public class BarcodeActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         selfCheck.loadData();
+        mode = selfCheck.defaultBarcodeType;
+
+        ImageView barcodeView = (ImageView) findViewById(R.id.barcode);
+        Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode);
+        barcodeView.setImageBitmap(studentCode);
     }
 }

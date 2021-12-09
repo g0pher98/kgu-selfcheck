@@ -38,6 +38,7 @@ class SelfCheckInfo {
     Boolean simpleMode = false; // 빠른 문진 설정 여부
     Boolean isLastCheckClean = true; // 최근 문진이 모두 "예"를 선택했는지.
     Boolean isAutoBright = true; // 바코드 출력 시 자동 밝기조절 여부
+    int defaultBarcodeType = 1;
 
     // Helpful variables
     String reqHost = null;
@@ -61,7 +62,7 @@ class SelfCheckInfo {
 
     public void reset() {
         /**
-         * 저장된 정보를 모두 초기화 하는 메소드 TODO 메뉴에서 초기화할 수 있도록 개발 예정
+         * 저장된 정보를 모두 초기화 하는 메소드
          */
 
         // save 파일 삭제
@@ -80,12 +81,13 @@ class SelfCheckInfo {
         JSONObject json = new JSONObject();
 
         try {
-            json.put("studentID"       , studentID);
-            json.put("name"            , name);
-            json.put("lastSubmitDate"  , dateFormat.format(lastSubmitDate));
-            json.put("simpleMode"      , simpleMode);
-            json.put("isLastCheckClean", isLastCheckClean);
-            json.put("isAutoBright", isAutoBright);
+            json.put("studentID"               , studentID);
+            json.put("name"                    , name);
+            json.put("lastSubmitDate"          , dateFormat.format(lastSubmitDate));
+            json.put("simpleMode"              , simpleMode);
+            json.put("isLastCheckClean"        , isLastCheckClean);
+            json.put("isAutoBright"            , isAutoBright);
+            json.put("defaultBarcodeType"      , defaultBarcodeType);
         } catch (Exception e) {
             Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
@@ -98,12 +100,13 @@ class SelfCheckInfo {
         try {
             JSONObject json = new JSONObject(raw);
 
-            studentID        = json.getString("studentID");
-            name             = json.getString("name");
-            lastSubmitDate   = dateFormat.parse(json.getString("lastSubmitDate"));
-            simpleMode       = json.getBoolean("simpleMode");
-            isLastCheckClean = json.getBoolean("isLastCheckClean");
-            isAutoBright     = json.getBoolean("isAutoBright");
+            studentID              = json.getString("studentID");
+            name                   = json.getString("name");
+            lastSubmitDate         = dateFormat.parse(json.getString("lastSubmitDate"));
+            simpleMode             = json.getBoolean("simpleMode");
+            isLastCheckClean       = json.getBoolean("isLastCheckClean");
+            isAutoBright           = json.getBoolean("isAutoBright");
+            defaultBarcodeType     = json.getInt("defaultBarcodeType");
         } catch (Exception e) {
             Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
@@ -173,12 +176,13 @@ class SelfCheckInfo {
          * 현재 데이터를 포함하는 intent를 생성하는 메소드
          */
         Intent intent = new Intent(context, c);
-        intent.putExtra("studentID"       , studentID);
-        intent.putExtra("name"            , name);
-        intent.putExtra("lastSubmitDate"  , lastSubmitDate);
-        intent.putExtra("simpleMode"      , simpleMode);
-        intent.putExtra("isLastCheckClean", isLastCheckClean);
-        intent.putExtra("isAutoBright", isAutoBright);
+        intent.putExtra("studentID"             , studentID);
+        intent.putExtra("name"                  , name);
+        intent.putExtra("lastSubmitDate"        , lastSubmitDate);
+        intent.putExtra("simpleMode"            , simpleMode);
+        intent.putExtra("isLastCheckClean"      , isLastCheckClean);
+        intent.putExtra("isAutoBright"          , isAutoBright);
+        intent.putExtra("defaultBarcodeType"    , defaultBarcodeType);
 
         return intent;
     }
@@ -187,12 +191,13 @@ class SelfCheckInfo {
         /**
          * intent로 전달된 데이터를 복원하는 메소드
          */
-        studentID        = intent.getStringExtra("studentID");
-        name             = intent.getStringExtra("name");
-        lastSubmitDate   = (Date) intent.getSerializableExtra("lastSubmitDate");
-        simpleMode       = intent.getBooleanExtra("simpleMode", false);
-        isLastCheckClean = intent.getBooleanExtra("isLastCheckClean", true);
-        isAutoBright     = intent.getBooleanExtra("isAutoBright", true);
+        studentID              = intent.getStringExtra("studentID");
+        name                   = intent.getStringExtra("name");
+        lastSubmitDate         = (Date) intent.getSerializableExtra("lastSubmitDate");
+        simpleMode             = intent.getBooleanExtra("simpleMode", false);
+        isLastCheckClean       = intent.getBooleanExtra("isLastCheckClean", true);
+        isAutoBright           = intent.getBooleanExtra("isAutoBright", true);
+        defaultBarcodeType     = intent.getIntExtra("defaultBarcodeType", 1);
     }
 
     public Boolean isCheckToday() {
@@ -203,24 +208,26 @@ class SelfCheckInfo {
                 .equals(dateFormat.format(lastSubmitDate));
     }
 
-    public Bitmap getStudentCode(String studentID, int mode) {
+    public Bitmap getStudentCode(String studentID, Integer newFormat) {
         /**
          * 바코드 또는 QR코드 생성 메소드
-         *     - mode 0 : barcode
-         *     - mode 1 : QRcode
+         *     - mode 1 : barcode
+         *     - mode 2 : QRcode
          */
 
-        // TODO 학번 뒤에 붙는 1이라는 숫자의 의미를 모르겠음. 모두 1인지도 확인필요. : 전산정보원 근로하면서 봤는데 학번 조회 시스템이 이상해서 뒤에 1글자 인식이 안됨 : 완료
+        if (newFormat == null) {
+            newFormat = defaultBarcodeType;
+        }
+
         String data = studentID + "1";
         BarcodeFormat format = null;
 
-        if (mode == 0) {
+        if (newFormat == 1) {
             format = BarcodeFormat.CODE_128;
-        } else if (mode == 1) {
+        } else if (newFormat == 2) {
             format = BarcodeFormat.QR_CODE;
         } else {
-            Toast.makeText(context, "잘못된 barcodeFormat입니다.", Toast.LENGTH_SHORT).show();
-            format = BarcodeFormat.QR_CODE; // 기본적으로 QR코드 출력
+            format = BarcodeFormat.CODE_128; // 기본적으로 QR코드 출력
         }
 
         BarcodeEncoder bEncoder = new BarcodeEncoder();

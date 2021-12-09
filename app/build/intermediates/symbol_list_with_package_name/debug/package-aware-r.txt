@@ -57,6 +57,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array barcodeType
 attr SharedValue
 attr SharedValueId
 attr actionBarDivider
@@ -1965,7 +1966,6 @@ id center_horizontal
 id center_vertical
 id chain
 id chains
-id change
 id checkbox
 id checked
 id chip

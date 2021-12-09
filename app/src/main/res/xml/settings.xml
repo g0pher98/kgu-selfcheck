@@ -13,6 +13,14 @@
             android:key="simple"
             android:defaultValue="false"
             />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/barcodeType"
+            android:entryValues="@array/barcodeType"
+            android:key="barcodeType"
+            android:title="바코드 종류"
+            android:summary="기본으로 출력할 바코드 종류를 설정합니다"
+            />
         <Preference
             android:title="초기화"
             android:summary="애플리케이션에 저장된 학번 및 문진 정보를 모두 초기화합니다"

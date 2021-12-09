@@ -15,9 +15,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO
-        //   - 설정 페이지 기능 추가. (개발자 소개, 교내 코로나대책본부 전화 등)
-        //   - QR코드에서 바코드로 변경 시 좌우로 길게 크기 변경되도록 수정
-        //   - 설정 아이콘 크기조절
         //   - 뒤로가기 눌렀을 때, 이전 페이지가 아니라 아예 꺼지도록 수정(액티비티 넘길 때 기존 것은 죽여야할듯)
 
 
@@ -39,15 +36,18 @@ public class MainActivity extends AppCompatActivity {
             // 기존 데이터 없을 경우
             Intent intent = selfCheck.toIntent(StudentIdActivity.class);
             startActivity(intent);
+            finish();
         } else {
             if (selfCheck.isCheckToday()) {
                 // 금일 문진이 기진행된 상황. 바코드 출력
                 Intent intent = selfCheck.toIntent(BarcodeActivity.class);
                 startActivity(intent);
+                finish();
             } else {
                 // 금일 문진이 미진행된 상황. 전자문진 시작
                 Intent intent = selfCheck.toIntent(CheckingActivity.class);
                 startActivity(intent);
+                finish();
             }
         }
     }

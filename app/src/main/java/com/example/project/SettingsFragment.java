@@ -45,7 +45,7 @@ public class SettingsFragment extends PreferenceFragment {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
             String msg = "";
-            if(s.equals("simple")){
+            if (s.equals("simple")){
                 boolean check = prefs.getBoolean("simple",false);
                 selfCheck.simpleMode = check;
                 selfCheck.saveData();
@@ -55,8 +55,7 @@ public class SettingsFragment extends PreferenceFragment {
                 } else {
                     msg = "기존모드로 복구되었습니다.";
                 }
-            }
-            if(s.equals("bright")){
+            } else if (s.equals("bright")){
                 boolean bright = prefs.getBoolean("bright",false);
                 selfCheck.isAutoBright = bright;
                 selfCheck.saveData();
@@ -65,6 +64,22 @@ public class SettingsFragment extends PreferenceFragment {
                     msg = "바코드 출력 시 화면 밝기가 조정됩니다.";
                 } else {
                     msg = "이제 화면 밝기를 제어하지 않습니다.";
+                }
+            } else if (s.equals("barcodeType")) {
+                String barcodeType = prefs.getString("barcodeType","바코드 기본형");
+                Toast.makeText(activity, barcodeType, Toast.LENGTH_SHORT).show();
+                int type = 1;
+                if (barcodeType.equals("QR코드")) {
+                    type = 2;
+                }
+
+                selfCheck.defaultBarcodeType = type;
+                selfCheck.saveData();
+
+                if (type == 1) {
+                    msg = "바코드 기본형이 기본으로 설정되었습니다.";
+                } else {
+                    msg = "QR코드가 기본으로 설정되었습니다.";
                 }
             }
             Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
