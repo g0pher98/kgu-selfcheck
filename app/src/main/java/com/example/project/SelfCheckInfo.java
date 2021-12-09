@@ -37,6 +37,7 @@ class SelfCheckInfo {
     Date lastSubmitDate = new Date(0);
     Boolean simpleMode = false; // 빠른 문진 설정 여부
     Boolean isLastCheckClean = true; // 최근 문진이 모두 "예"를 선택했는지.
+    Boolean isAutoBright = true; // 바코드 출력 시 자동 밝기조절 여부
 
     // Helpful variables
     String reqHost = null;
@@ -72,7 +73,6 @@ class SelfCheckInfo {
         studentID = "";
         name = "";
         lastSubmitDate = new Date(0);
-        simpleMode = false;
         isLastCheckClean = true;
     }
 
@@ -85,6 +85,7 @@ class SelfCheckInfo {
             json.put("lastSubmitDate"  , dateFormat.format(lastSubmitDate));
             json.put("simpleMode"      , simpleMode);
             json.put("isLastCheckClean", isLastCheckClean);
+            json.put("isAutoBright", isAutoBright);
         } catch (Exception e) {
             Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
@@ -102,6 +103,7 @@ class SelfCheckInfo {
             lastSubmitDate   = dateFormat.parse(json.getString("lastSubmitDate"));
             simpleMode       = json.getBoolean("simpleMode");
             isLastCheckClean = json.getBoolean("isLastCheckClean");
+            isAutoBright     = json.getBoolean("isAutoBright");
         } catch (Exception e) {
             Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
@@ -176,6 +178,7 @@ class SelfCheckInfo {
         intent.putExtra("lastSubmitDate"  , lastSubmitDate);
         intent.putExtra("simpleMode"      , simpleMode);
         intent.putExtra("isLastCheckClean", isLastCheckClean);
+        intent.putExtra("isAutoBright", isAutoBright);
 
         return intent;
     }
@@ -189,6 +192,7 @@ class SelfCheckInfo {
         lastSubmitDate   = (Date) intent.getSerializableExtra("lastSubmitDate");
         simpleMode       = intent.getBooleanExtra("simpleMode", false);
         isLastCheckClean = intent.getBooleanExtra("isLastCheckClean", true);
+        isAutoBright     = intent.getBooleanExtra("isAutoBright", true);
     }
 
     public Boolean isCheckToday() {

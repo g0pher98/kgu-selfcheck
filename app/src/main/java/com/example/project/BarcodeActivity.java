@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BarcodeActivity extends AppCompatActivity {
+    SelfCheck selfCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class BarcodeActivity extends AppCompatActivity {
 
         ImageView barcodeView = (ImageView) findViewById(R.id.barcode);
 
-        SelfCheck selfCheck = new SelfCheck(getApplicationContext(), getIntent());
+        selfCheck = new SelfCheck(getApplicationContext(), getIntent());
 
         // 내 정보 출력
         TextView myId = (TextView) findViewById(R.id.my_id);
@@ -93,5 +94,10 @@ public class BarcodeActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "잘못된 접근입니다. 학번정보가 없습니다", Toast.LENGTH_LONG).show();
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        selfCheck.loadData();
     }
 }

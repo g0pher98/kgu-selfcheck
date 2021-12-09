@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 
 public class StudentIdActivity extends AppCompatActivity {
+    SelfCheck selfCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class StudentIdActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        SelfCheck selfCheck = new SelfCheck(getApplicationContext(), getIntent());
+        selfCheck = new SelfCheck(getApplicationContext(), getIntent());
 
         // 내 정보 출력
         TextView myId = (TextView) findViewById(R.id.my_id);
@@ -102,7 +103,6 @@ public class StudentIdActivity extends AppCompatActivity {
                             return;
                         }
 
-                        // TODO 이름 출력 후 맞는지 확인 : 완료
                         AlertDialog.Builder myAlertBuilder =
                                 new AlertDialog.Builder(StudentIdActivity.this);
                         // alert의 title과 Messege 세팅
@@ -135,5 +135,10 @@ public class StudentIdActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        selfCheck.loadData();
     }
 }

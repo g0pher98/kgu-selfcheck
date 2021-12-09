@@ -86,7 +86,7 @@ public class SelfCheck extends SelfCheckInfo {
         requestFunction(url, params, funcAfterReq);
     }
 
-    public void requestSubmitCheckResult(Boolean chkID1, Boolean chkID2, Boolean chkID3, FunctionAfterRequest funcAfterReq) {
+    public void requestSubmitCheckResult(boolean[] result, FunctionAfterRequest funcAfterReq) {
         /**
          * 전자문진 결과를 전송하는 메소드
          */
@@ -97,9 +97,9 @@ public class SelfCheck extends SelfCheckInfo {
         params.put("visit_date", dateFormat.format(todayDate));
         params.put("id", studentID);
         params.put("check_gb", "2");
-        params.put("answer010" + (chkID1 ? "2":"1"), "on");
-        params.put("answer020" + (chkID2 ? "2":"1"), "on");
-        params.put("answer030" + (chkID3 ? "2":"1"), "on");
+        params.put("answer010" + (result[0] ? "2":"1"), "on");
+        params.put("answer020" + (result[1] ? "2":"1"), "on");
+        params.put("answer030" + (result[2] ? "2":"1"), "on");
 
         requestFunction(url, params, funcAfterReq);
     }

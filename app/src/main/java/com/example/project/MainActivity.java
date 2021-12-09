@@ -9,17 +9,16 @@ import android.os.Build;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
+    SelfCheck selfCheck;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO
-        //   - 설정 값 각 기능이 실제로도 적용되도록 수정 (간편문진, 자동밝기)
         //   - 설정 페이지 기능 추가. (개발자 소개, 교내 코로나대책본부 전화 등)
         //   - QR코드에서 바코드로 변경 시 좌우로 길게 크기 변경되도록 수정
         //   - 설정 아이콘 크기조절
         //   - 뒤로가기 눌렀을 때, 이전 페이지가 아니라 아예 꺼지도록 수정(액티비티 넘길 때 기존 것은 죽여야할듯)
-        //   -
 
 
         /**
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        SelfCheck selfCheck = new SelfCheck(getApplicationContext());
+        selfCheck = new SelfCheck(getApplicationContext());
 
         if (selfCheck.studentID.equals("")) {
             // 기존 데이터 없을 경우
@@ -51,5 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        selfCheck.loadData();
     }
 }
