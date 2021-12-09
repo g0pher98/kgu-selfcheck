@@ -1,10 +1,8 @@
-com/example/project/SettingActivity.java
- com.example.project.SettingActivity
-com/example/project/CheckingActivity.java
- com.example.project.CheckingActivity
- com.example.project.CheckingActivity$1
- com.example.project.CheckingActivity$2
- com.example.project.CheckingActivity$2$1
+com/example/project/MainActivity.java
+ com.example.project.MainActivity
+com/example/project/SettingsFragment.java
+ com.example.project.SettingsFragment
+ com.example.project.SettingsFragment$1
 com/example/project/BuildConfig.java
  com.example.project.BuildConfig
 com/example/project/SelfCheck.java
@@ -15,6 +13,13 @@ com/example/project/SelfCheck.java
  com.example.project.SelfCheck$3
 com/example/project/SelfCheckInfo.java
  com.example.project.SelfCheckInfo
+com/example/project/SettingActivity.java
+ com.example.project.SettingActivity
+com/example/project/CheckingActivity.java
+ com.example.project.CheckingActivity
+ com.example.project.CheckingActivity$1
+ com.example.project.CheckingActivity$2
+ com.example.project.CheckingActivity$2$1
 com/example/project/BarcodeActivity.java
  com.example.project.BarcodeActivity
  com.example.project.BarcodeActivity$1
@@ -27,8 +32,3 @@ com/example/project/StudentIdActivity.java
  com.example.project.StudentIdActivity$3$1
  com.example.project.StudentIdActivity$3$1$1
  com.example.project.StudentIdActivity$3$1$2
-com/example/project/MainActivity.java
- com.example.project.MainActivity
-com/example/project/SettingsFragment.java
- com.example.project.SettingsFragment
- com.example.project.SettingsFragment$1
