@@ -59,7 +59,7 @@ public class SelfCheck extends SelfCheckInfo {
         context = newContext;
         init();
 
-        reset(); // TODO 현재 line은 디버깅용. 지울예정
+        //reset(); // TODO 현재 line은 디버깅용. 지울예정
         loadData();
     }
 
@@ -97,9 +97,9 @@ public class SelfCheck extends SelfCheckInfo {
         params.put("visit_date", dateFormat.format(todayDate));
         params.put("id", studentID);
         params.put("check_gb", "2");
-        params.put("answer010" + (chkID1 ? "1":"2"), "on");
-        params.put("answer020" + (chkID2 ? "1":"2"), "on");
-        params.put("answer030" + (chkID3 ? "1":"2"), "on");
+        params.put("answer010" + (chkID1 ? "2":"1"), "on");
+        params.put("answer020" + (chkID2 ? "2":"1"), "on");
+        params.put("answer030" + (chkID3 ? "2":"1"), "on");
 
         requestFunction(url, params, funcAfterReq);
     }

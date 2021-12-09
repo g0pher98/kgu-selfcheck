@@ -206,7 +206,7 @@ class SelfCheckInfo {
          *     - mode 1 : QRcode
          */
 
-        // TODO 학번 뒤에 붙는 1이라는 숫자의 의미를 모르겠음. 모두 1인지도 확인필요.
+        // TODO 학번 뒤에 붙는 1이라는 숫자의 의미를 모르겠음. 모두 1인지도 확인필요. : 전산정보원 근로하면서 봤는데 학번 조회 시스템이 이상해서 뒤에 1글자 인식이 안됨 : 완료
         String data = studentID + "1";
         BarcodeFormat format = null;
 

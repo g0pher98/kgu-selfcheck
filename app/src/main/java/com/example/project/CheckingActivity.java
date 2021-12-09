@@ -4,31 +4,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
 
 public class CheckingActivity extends AppCompatActivity {
 
@@ -46,6 +31,15 @@ public class CheckingActivity extends AppCompatActivity {
         RadioGroup on3 = (RadioGroup) findViewById(R.id.on3);
 
         SelfCheck selfCheck = new SelfCheck(getApplicationContext(), getIntent());
+
+        ImageButton b = (ImageButton) findViewById(R.id.menu);
+        b.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = selfCheck.toIntent(SettingActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 내 정보 출력
         TextView myId = (TextView) findViewById(R.id.my_id);
@@ -81,12 +75,12 @@ public class CheckingActivity extends AppCompatActivity {
                     return;
                 }
 
-                Boolean chk1 = true, chk2 = true, chk3 = true;
+                Boolean chk1 = false, chk2 = false, chk3 = false;
                 Boolean isCleanResult = true;
 
-                if (chkRadioId1 != R.id.on11) { chk1 = false; isCleanResult = false; }
-                if (chkRadioId2 != R.id.on21) { chk2 = false; isCleanResult = false; }
-                if (chkRadioId3 != R.id.on31) { chk3 = false; isCleanResult = false; }
+                if (chkRadioId1 == R.id.on11) { chk1 = true; isCleanResult = false; }
+                if (chkRadioId2 == R.id.on21) { chk2 = true; isCleanResult = false; }
+                if (chkRadioId3 == R.id.on31) { chk3 = true; isCleanResult = false; }
 
                 Boolean finalIsCleanResult = isCleanResult;
                 selfCheck.requestSubmitCheckResult(chk1, chk2, chk3, new FunctionAfterRequest() {

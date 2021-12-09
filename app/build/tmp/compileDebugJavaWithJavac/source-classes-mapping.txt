@@ -1,18 +1,34 @@
-com/example/project/checking.java
- com.example.project.checking
+com/example/project/SettingActivity.java
+ com.example.project.SettingActivity
+com/example/project/CheckingActivity.java
+ com.example.project.CheckingActivity
+ com.example.project.CheckingActivity$1
+ com.example.project.CheckingActivity$2
+ com.example.project.CheckingActivity$2$1
 com/example/project/BuildConfig.java
  com.example.project.BuildConfig
-com/example/project/studentID.java
- com.example.project.studentID
- com.example.project.studentID$1
- com.example.project.studentID$2
- com.example.project.studentID$3
- com.example.project.studentID$4
- com.example.project.studentID$5
-com/example/project/barcode.java
- com.example.project.barcode
- com.example.project.barcode$1
- com.example.project.barcode$2
- com.example.project.barcode$3
+com/example/project/SelfCheck.java
+ com.example.project.FunctionAfterRequest
+ com.example.project.SelfCheck
+ com.example.project.SelfCheck$1
+ com.example.project.SelfCheck$2
+ com.example.project.SelfCheck$3
+com/example/project/SelfCheckInfo.java
+ com.example.project.SelfCheckInfo
+com/example/project/BarcodeActivity.java
+ com.example.project.BarcodeActivity
+ com.example.project.BarcodeActivity$1
+ com.example.project.BarcodeActivity$2
+com/example/project/StudentIdActivity.java
+ com.example.project.StudentIdActivity
+ com.example.project.StudentIdActivity$1
+ com.example.project.StudentIdActivity$2
+ com.example.project.StudentIdActivity$3
+ com.example.project.StudentIdActivity$3$1
+ com.example.project.StudentIdActivity$3$1$1
+ com.example.project.StudentIdActivity$3$1$2
 com/example/project/MainActivity.java
  com.example.project.MainActivity
+com/example/project/SettingsFragment.java
+ com.example.project.SettingsFragment
+ com.example.project.SettingsFragment$1

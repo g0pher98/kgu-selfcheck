@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (selfCheck.studentID.equals("")) {
             // 기존 데이터 없을 경우
-            Intent intent = selfCheck.toIntent(studentIdActivity.class);
+            Intent intent = selfCheck.toIntent(StudentIdActivity.class);
             startActivity(intent);
         } else {
             if (selfCheck.isCheckToday()) {

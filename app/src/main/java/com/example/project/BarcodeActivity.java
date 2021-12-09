@@ -6,35 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BarcodeActivity extends AppCompatActivity {
 
@@ -61,6 +39,29 @@ public class BarcodeActivity extends AppCompatActivity {
         // 내 정보 출력
         TextView myId = (TextView) findViewById(R.id.my_id);
         TextView myName = (TextView) findViewById(R.id.my_name);
+        ImageButton b2 = (ImageButton) findViewById(R.id.menu);
+        b2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = selfCheck.toIntent(SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        ImageButton b1 = (ImageButton) findViewById(R.id.change);
+
+        final int[] mode = {1};
+
+        b1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(mode[0] == 1)
+                    mode[0] = 0;
+                else
+                    mode[0] = 1;
+                Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode[0]);
+                barcodeView.setImageBitmap(studentCode);
+            }
+        });
 
         if (selfCheck.studentID.equals("")) {
             myId.setTextColor(Color.parseColor("#dddddd"));
@@ -87,7 +88,7 @@ public class BarcodeActivity extends AppCompatActivity {
         }
 
         if (!selfCheck.studentID.equals("")) {
-            Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, 1);
+            Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode[0]);
             barcodeView.setImageBitmap(studentCode);
         } else {
             Toast.makeText(getApplicationContext(), "잘못된 접근입니다. 학번정보가 없습니다", Toast.LENGTH_LONG).show();
