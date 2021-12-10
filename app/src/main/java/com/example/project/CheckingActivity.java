@@ -79,6 +79,7 @@ public class CheckingActivity extends AppCompatActivity {
 
                         Intent intent = selfCheck.toIntent(BarcodeActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 });
             }

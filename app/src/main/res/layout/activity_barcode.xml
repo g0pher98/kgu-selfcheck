@@ -122,7 +122,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="금일 전자문진을 이미 완료하셨습니다."
+            android:text="금일 전자문진을 완료하셨습니다."
             android:textAlignment="center"
             android:textColor="#2026AA"
             app:layout_constraintEnd_toEndOf="@+id/barcode"

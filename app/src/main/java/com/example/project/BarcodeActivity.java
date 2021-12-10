@@ -32,6 +32,8 @@ public class BarcodeActivity extends AppCompatActivity {
         selfCheck = new SelfCheck(getApplicationContext(), getIntent());
         mode = selfCheck.defaultBarcodeType;
 
+        setTopBar();
+
         // 화면 밝기 설정
         // TODO
         //   - 화면 밝기가 액티비티를 벗어나면 원복되는지 확인해야함.
@@ -42,45 +44,13 @@ public class BarcodeActivity extends AppCompatActivity {
             params.screenBrightness = 1f;
         }
 
-        // 상단 View 설정
-        TextView myId = (TextView) findViewById(R.id.my_id);
-        TextView myName = (TextView) findViewById(R.id.my_name);
-        ImageButton btnMenu = (ImageButton) findViewById(R.id.menu);
-        btnMenu.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = selfCheck.toIntent(SettingActivity.class);
-                startActivity(intent);
-            }
-        });
-
         ImageView barcodeView = (ImageView) findViewById(R.id.barcode);
-
         barcodeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mode == 1) {
-                    mode = 2;
-                } else {
-                    mode = 1;
-                }
-
-                Bitmap studentCode = selfCheck.getStudentCode(
-                        selfCheck.studentID, mode, barcodeView.getWidth(), barcodeView.getHeight()
-                );
-                // TODO QR/바코드에 따라 크기 바뀌도록 수정
-                barcodeView.setImageBitmap(studentCode);
+                showBarcode(true);
             }
         });
-
-        if (selfCheck.studentID.equals("")) {
-            myId.setTextColor(Color.parseColor("#dddddd"));
-        } else { myId.setText(selfCheck.studentID); }
-
-        if (selfCheck.name.equals("")) {
-            myName.setTextColor(Color.parseColor("#dddddd"));
-        } else { myName.setText(selfCheck.name); }
-
 
         // 금일 문진 여부에 따른 출력 메세지 변경
         TextView msg    = (TextView) findViewById(R.id.barcode_msg);
@@ -97,9 +67,9 @@ public class BarcodeActivity extends AppCompatActivity {
             submsg.setText("QR 또는 바코드를 터치해서 모드를 전환하실 수 있습니다.");
         }
 
+        // 최종 바코드 출력부
         if (!selfCheck.studentID.equals("")) {
-            Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode, );
-            barcodeView.setImageBitmap(studentCode);
+            showBarcode(false);
         } else {
             Toast.makeText(getApplicationContext(), "잘못된 접근입니다. 학번정보가 없습니다", Toast.LENGTH_LONG).show();
         }
@@ -109,9 +79,53 @@ public class BarcodeActivity extends AppCompatActivity {
         super.onResume();
         selfCheck.loadData();
         mode = selfCheck.defaultBarcodeType;
+        showBarcode(false);
+    }
 
-        ImageView barcodeView = (ImageView) findViewById(R.id.barcode);
-        Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode);
-        barcodeView.setImageBitmap(studentCode);
+    public void setTopBar() {
+        // 상단 View 설정
+        TextView myId = (TextView) findViewById(R.id.my_id);
+        TextView myName = (TextView) findViewById(R.id.my_name);
+        ImageButton btnMenu = (ImageButton) findViewById(R.id.menu);
+        btnMenu.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = selfCheck.toIntent(SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        if (selfCheck.studentID.equals("")) {
+            myId.setTextColor(Color.parseColor("#dddddd"));
+        } else { myId.setText(selfCheck.studentID); }
+
+        if (selfCheck.name.equals("")) {
+            myName.setTextColor(Color.parseColor("#dddddd"));
+        } else { myName.setText(selfCheck.name); }
+    }
+
+    public void showBarcode(Boolean isChange) {
+        ImageView barcode = (ImageView) findViewById(R.id.barcode);
+
+        // mode 변경
+        if (isChange != null && isChange)
+            mode = (mode != 1)? 1:2;
+
+        // mode에 따른 View 크기 변경
+        int width = 500, height = 500;
+        if (mode == 1) {
+            width = 800;
+            height = 300;
+        }
+        barcode.getLayoutParams().width  = width;
+        barcode.getLayoutParams().height = height;
+        barcode.requestLayout();
+
+        // 바코드 생성 및 적용
+        Bitmap studentCode = selfCheck.getStudentCode(
+                selfCheck.studentID, mode,
+                width, height
+        );
+        barcode.setImageBitmap(studentCode);
     }
 }

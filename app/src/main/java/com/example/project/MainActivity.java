@@ -14,10 +14,6 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO
-        //   - 뒤로가기 눌렀을 때, 이전 페이지가 아니라 아예 꺼지도록 수정(액티비티 넘길 때 기존 것은 죽여야할듯)
-
-
         /**
          * 기존 데이터 존재 여부에 따라 보여지는 Activity가 달라지도록 구성
          *     - 데이터 없음(초기 실행) -> studentID (학번조회 및 등록)

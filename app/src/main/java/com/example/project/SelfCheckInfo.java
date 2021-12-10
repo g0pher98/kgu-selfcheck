@@ -230,6 +230,7 @@ class SelfCheckInfo {
             format = BarcodeFormat.CODE_128;
         } else if (newFormat == 2) {
             format = BarcodeFormat.QR_CODE;
+
         } else {
             format = BarcodeFormat.CODE_128; // 기본적으로 QR코드 출력
         }
@@ -239,7 +240,7 @@ class SelfCheckInfo {
         Bitmap bitmap = null;
 
         try {
-            bitmap = bEncoder.encodeBitmap(data, format, 800, 600);
+            bitmap = bEncoder.encodeBitmap(data, format, width, height);
         } catch (Exception e) {
             Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();

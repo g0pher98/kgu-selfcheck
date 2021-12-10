@@ -67,7 +67,6 @@ public class SettingsFragment extends PreferenceFragment {
                 }
             } else if (s.equals("barcodeType")) {
                 String barcodeType = prefs.getString("barcodeType","바코드 기본형");
-                Toast.makeText(activity, barcodeType, Toast.LENGTH_SHORT).show();
                 int type = 1;
                 if (barcodeType.equals("QR코드")) {
                     type = 2;
@@ -100,6 +99,7 @@ public class SettingsFragment extends PreferenceFragment {
                     selfCheck.reset();
                     Intent intent = selfCheck.toIntent(MainActivity.class);
                     startActivity(intent);
+                    activity.finish();
                 }
             });
             myAlertBuilder.setNegativeButton("취소", new DialogInterface.OnClickListener() {

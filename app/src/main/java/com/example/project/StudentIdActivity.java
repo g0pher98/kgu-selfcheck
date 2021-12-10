@@ -32,26 +32,7 @@ public class StudentIdActivity extends AppCompatActivity {
 
         selfCheck = new SelfCheck(getApplicationContext(), getIntent());
 
-        // 내 정보 출력
-        TextView myId = (TextView) findViewById(R.id.my_id);
-        TextView myName = (TextView) findViewById(R.id.my_name);
-        ImageButton b = (ImageButton) findViewById(R.id.menu);
-        b.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = selfCheck.toIntent(SettingActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        if (selfCheck.studentID.equals("")) {
-            myId.setTextColor(Color.parseColor("#dddddd"));
-        } else { myId.setText(selfCheck.studentID); }
-
-        if (selfCheck.name.equals("")) {
-            myName.setTextColor(Color.parseColor("#dddddd"));
-        } else { myName.setText(selfCheck.name); }
-
+        setTopBar();
 
         TextView b1 = (TextView) findViewById(R.id.find);
         Button b2 = (Button) findViewById(R.id.next);
@@ -119,6 +100,7 @@ public class StudentIdActivity extends AppCompatActivity {
 
                                 Intent intent = selfCheck.toIntent(CheckingActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
                         });
                         myAlertBuilder.setNegativeButton("불일치", new DialogInterface.OnClickListener() {
@@ -140,5 +122,26 @@ public class StudentIdActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         selfCheck.loadData();
+    }
+    public void setTopBar() {
+        // 상단 View 설정
+        TextView myId = (TextView) findViewById(R.id.my_id);
+        TextView myName = (TextView) findViewById(R.id.my_name);
+        ImageButton btnMenu = (ImageButton) findViewById(R.id.menu);
+        btnMenu.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = selfCheck.toIntent(SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        if (selfCheck.studentID.equals("")) {
+            myId.setTextColor(Color.parseColor("#dddddd"));
+        } else { myId.setText(selfCheck.studentID); }
+
+        if (selfCheck.name.equals("")) {
+            myName.setTextColor(Color.parseColor("#dddddd"));
+        } else { myName.setText(selfCheck.name); }
     }
 }
