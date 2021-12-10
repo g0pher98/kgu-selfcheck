@@ -56,14 +56,18 @@ public class BarcodeActivity extends AppCompatActivity {
 
         ImageView barcodeView = (ImageView) findViewById(R.id.barcode);
 
-        barcodeView.setOnClickListener(new View.OnClickListener(){
+        barcodeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mode == 1)
+                if(mode == 1) {
                     mode = 2;
-                else
+                } else {
                     mode = 1;
-                Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode);
+                }
+
+                Bitmap studentCode = selfCheck.getStudentCode(
+                        selfCheck.studentID, mode, barcodeView.getWidth(), barcodeView.getHeight()
+                );
                 // TODO QR/바코드에 따라 크기 바뀌도록 수정
                 barcodeView.setImageBitmap(studentCode);
             }
@@ -94,7 +98,7 @@ public class BarcodeActivity extends AppCompatActivity {
         }
 
         if (!selfCheck.studentID.equals("")) {
-            Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode);
+            Bitmap studentCode = selfCheck.getStudentCode(selfCheck.studentID, mode, );
             barcodeView.setImageBitmap(studentCode);
         } else {
             Toast.makeText(getApplicationContext(), "잘못된 접근입니다. 학번정보가 없습니다", Toast.LENGTH_LONG).show();

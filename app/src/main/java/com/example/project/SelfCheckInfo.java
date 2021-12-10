@@ -208,12 +208,16 @@ class SelfCheckInfo {
                 .equals(dateFormat.format(lastSubmitDate));
     }
 
-    public Bitmap getStudentCode(String studentID, Integer newFormat) {
+    public Bitmap getStudentCode(String studentID, Integer newFormat, Integer newWidth, Integer newHeight) {
         /**
          * 바코드 또는 QR코드 생성 메소드
          *     - mode 1 : barcode
          *     - mode 2 : QRcode
          */
+        Integer width=500, height=500;
+
+        if (newWidth != null)  width = newWidth;
+        if (newHeight != null) height = newHeight;
 
         if (newFormat == null) {
             newFormat = defaultBarcodeType;
@@ -230,10 +234,12 @@ class SelfCheckInfo {
             format = BarcodeFormat.CODE_128; // 기본적으로 QR코드 출력
         }
 
+        // QR코드 생성부
         BarcodeEncoder bEncoder = new BarcodeEncoder();
         Bitmap bitmap = null;
+
         try {
-            bitmap = bEncoder.encodeBitmap(data, format, 600, 600);
+            bitmap = bEncoder.encodeBitmap(data, format, 800, 600);
         } catch (Exception e) {
             Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
