@@ -35,9 +35,6 @@ public class BarcodeActivity extends AppCompatActivity {
         setTopBar();
 
         // 화면 밝기 설정
-        // TODO
-        //   - 화면 밝기가 액티비티를 벗어나면 원복되는지 확인해야함.
-        //   - 설정 변경 후 바로 반영되도록 수정해야함.
         if (selfCheck.isAutoBright) {
             WindowManager.LayoutParams params = getWindow().getAttributes();
             float brightness = params.screenBrightness;
@@ -92,6 +89,7 @@ public class BarcodeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = selfCheck.toIntent(SettingActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

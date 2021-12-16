@@ -3,7 +3,6 @@ package com.example.project;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -133,6 +131,7 @@ public class StudentIdActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = selfCheck.toIntent(SettingActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

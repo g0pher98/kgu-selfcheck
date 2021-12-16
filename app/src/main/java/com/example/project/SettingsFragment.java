@@ -5,14 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
@@ -22,8 +21,9 @@ public class SettingsFragment extends PreferenceFragment {
     SelfCheck selfCheck;
 
     Preference resetPreference;
-    Preference mainPreference;
+    SwitchPreference brightPreference;
     SwitchPreference simplePreference;
+    ListPreference listPreference;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,11 +33,16 @@ public class SettingsFragment extends PreferenceFragment {
 
         addPreferencesFromResource(R.xml.settings);
         resetPreference = (Preference) findPreference("reset");
-        mainPreference = (Preference) findPreference("main");
+        brightPreference = (SwitchPreference) findPreference("bright");
         simplePreference = (SwitchPreference) findPreference("simple");
+        listPreference = (ListPreference) findPreference("barcodeType");
 
         prefs = PreferenceManager.getDefaultSharedPreferences(activity);
         selfCheck = new SelfCheck(activity);
+
+        brightPreference.setChecked(selfCheck.isAutoBright);
+        simplePreference.setChecked(selfCheck.simpleMode);
+        listPreference.setValueIndex(selfCheck.defaultBarcodeType-1);
 
         prefs.registerOnSharedPreferenceChangeListener(prefListener);
     }
@@ -84,6 +89,7 @@ public class SettingsFragment extends PreferenceFragment {
             Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
         }
     };
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference){
         String s = preference.getKey();

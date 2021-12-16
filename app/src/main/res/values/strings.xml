@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project</string>
+    <string name="app_name">KGU PASS</string>
 
     <string name="req_host">https://kutis.kyonggi.ac.kr/</string>
     <string name="save_filename">selfcheck.json</string>

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -39,6 +38,7 @@ public class CheckingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = selfCheck.toIntent(SettingActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -70,8 +70,6 @@ public class CheckingActivity extends AppCompatActivity {
                 selfCheck.requestSubmitCheckResult(chkResult, new FunctionAfterRequest() {
                     @Override
                     public void afterRequest(String response) {
-                        Log.e(this.toString(), response);
-
                         selfCheck.lastSubmitDate = selfCheck.todayDate;
                         selfCheck.isLastCheckClean = finalIsCleanResult;
 

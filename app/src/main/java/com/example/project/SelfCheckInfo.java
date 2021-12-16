@@ -5,19 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
-
 import org.json.JSONObject;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -45,7 +37,6 @@ class SelfCheckInfo {
     Context context = null;
     Resources resources = null;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault());
-    String sdcardPath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
     Calendar calendar = Calendar.getInstance();
     Date todayDate = calendar.getTime();
     RequestQueue requestQueue = null;
@@ -75,6 +66,8 @@ class SelfCheckInfo {
         name = "";
         lastSubmitDate = new Date(0);
         isLastCheckClean = true;
+        simpleMode = false;
+        isAutoBright = true;
     }
 
     public JSONObject toJSON() {
@@ -89,7 +82,6 @@ class SelfCheckInfo {
             json.put("isAutoBright"            , isAutoBright);
             json.put("defaultBarcodeType"      , defaultBarcodeType);
         } catch (Exception e) {
-            Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
         }
 
@@ -108,7 +100,6 @@ class SelfCheckInfo {
             isAutoBright           = json.getBoolean("isAutoBright");
             defaultBarcodeType     = json.getInt("defaultBarcodeType");
         } catch (Exception e) {
-            Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
         }
     }
@@ -117,7 +108,6 @@ class SelfCheckInfo {
         /**
          저장된 JSON 파일에서 기존 데이터를 불러오는 메소드
          */
-        Log.i("_____", "loadData() 시작");
 
         FileInputStream fis = null;
         DataInputStream dis = null;
@@ -132,19 +122,13 @@ class SelfCheckInfo {
             dis.close();
             fis.close();
         } catch (FileNotFoundException e) {
-            Log.e("_____", "파일이 존재하지 않음.");
             saveData();
             return;
         } catch (Exception e) {
-            Log.e("_____", "Exception : " + e.toString());
             e.printStackTrace();
         }
 
         fromJSONString(raw);
-        Log.i("_____", raw);
-
-
-        Log.i("_____", "loadData()  끝");
     }
 
     public void saveData() {
@@ -152,8 +136,6 @@ class SelfCheckInfo {
          * 현재 데이터를 JSON 파일에 저장하는 메소드
          */
         JSONObject data = toJSON();
-
-        Log.i("_____", data.toString());
 
         // JSON 데이터를 파일에 저장
         FileOutputStream fos = null;
@@ -166,7 +148,6 @@ class SelfCheckInfo {
             dos.close();
             fos.close();
         } catch (Exception e) {
-            Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
         }
     }
@@ -242,7 +223,6 @@ class SelfCheckInfo {
         try {
             bitmap = bEncoder.encodeBitmap(data, format, width, height);
         } catch (Exception e) {
-            Log.e(this.toString(), "_____Exception : " + e.toString());
             e.printStackTrace();
         }
 
